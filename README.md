@@ -9,19 +9,22 @@ In this project, we will be building our first [Python `Classes`](https://docs.p
 # Task 1: Getting to the Mountain
 
 ## Data Associated with `Navigator` [`navigator.py`]
-> - `navigator : dict`: a dictionary mapping store types to a list of tuples, each containing the name and location of the given point of interest
+> - `locaction_info : dict`: a dictionary mapping store types to a list of tuples, each containing the name and location of the given point of interest
     > - example k:v pair: 
         > `'breakfast': [('bshop 1', (10,50)), ('bshop 2', (35,75))]` means breakfast shop `bshop 1` is located at `(10,50)`, etc.
     > - keys: `breakfast`, `rental`, `mountain`
 
 > ## Functions in `Navigator`, In Order
 > `__init__`: initializes the navigator class. This is done for you
+
 > `distance`
 > ### Description
     > - computes the distance between the two points, `p1` and `p2`
+    > - this is implemented for you to use in `find_route`
 > ### Inputs
     > - `p1 : tuple[float]`: the first location's x and y coords
     > - `p2 : tuple[float]`: the second location's x and y coords 
+
 > `find_route`
 > ### Description
     > - finds the shortest route from your current location, passing through a breakfast store, a rental store, and then to the nearest mountain
@@ -31,6 +34,8 @@ In this project, we will be building our first [Python `Classes`](https://docs.p
     > - `curr_loc : tuple[float]`: your current x,y coordinates
 > ### Returns
     > - `best_path`: a list of names, like this: `[breakfast store, rental store, mountain]` corresponding to the stops on the shortest path
+> `find_route`
+
 
 # Task 2: Renting Gear For You and Your Friends
 > ## Data Associated With the `RentalStore` Class   [`rental_store.py`]
