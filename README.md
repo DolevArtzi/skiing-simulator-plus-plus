@@ -9,7 +9,7 @@ In this project, we will be building our first [Python `Classes`](https://docs.p
 # Task 1: Getting to the Mountain
 
 ## Data Associated with `Navigator` [`navigator.py`]
-> - `locaction_info : dict`: a dictionary mapping store types to a list of tuples, each containing the name and location of the given point of interest
+> - `location_info : dict`: a dictionary mapping store types to a list of tuples, each containing the name and location of the given point of interest
     > - example k:v pair: 
         > `'breakfast': [('bshop 1', (10,50)), ('bshop 2', (35,75))]` means breakfast shop `bshop 1` is located at `(10,50)`, etc.
     > - keys: `breakfast`, `rental`, `mountain`
@@ -56,12 +56,15 @@ In this project, we will be building our first [Python `Classes`](https://docs.p
     > - uses Python's `random` module to generate 3 price ranges for each item this store sells
     > - make your own price ranges, so that they don't overlap
     > - make the prices higher if it's the weekend (`is_weekend`) or if it's skiing season (`is_season`), and the highest if it's both the weekend and ski season
+        > - specifically, if it's either the weekend or ski season (but not both), the lowest price should be at least $50 for each item
+        > - if its both the weekend and ski season, the lowest price should be at least $80 for each item
+        > - if its neither, the lowest price should be at least $30 for each item
 > ### Effects
     >   - populates the `price_points` dictionary, mapping each `gear_type` to a length-3 list of tuples of price ranges
 
 > `generate_price`
 > ### Description
-    > - given the `item_name`, and the index into `price_points`, generates a random price for the given item using Python's `random` module
+    > - given the `item_name`, and the index into `price_points[item_name]`, generates a random price for the given item using Python's `random` module that is in the chosen range
 > ### Inputs
     > - `item_name : str`
     > - `range_idx : int`: either `0`, `1`, or `2`: the index into the corresponding tuple of price ranges in the `price_points` dictionary
@@ -76,7 +79,7 @@ In this project, we will be building our first [Python `Classes`](https://docs.p
     > - `skier_name : str`
     > - `gear_list : list[str]`: a list of the gear items the skier needs to buy
     > - `prices_max : list[int]`: a list of the skier's price range for each item, such that `prices_max[i]` is the skier's max price range for the item referenced by `gear_list[i]`
-        > - this is represented by an index: `0`, `1`, or `2`: with 0 being the lowest price range, and 2 being the highest
+        > - if the skier's maximum price is lower than all the ranges we've generated, use the lowest range
 > ### Effects
     > - adds a new k:v pair to the `skiers_served` dictionary, where the key is the skier's name, and the value is a list of tuples, for example, `[('pants',100),('coat',250)]` means you sold the skier pants which cost $100 and a coat that costs $250
 
@@ -102,6 +105,9 @@ In this project, we will be building our first [Python `Classes`](https://docs.p
 > `close_store`
 > ### Description
     > - for each skier served, add the money earned from them to `money_earned`, and nicely displays the day's spoils. To display, calls `RentalStore.print_sales` after calling `check_out_skier` for each skier we served today
+> ### Returns
+> - the total amount of money earned today
+ 
 > ### Effects
     > - fills in the day's information to the `money_earned` parameter of our `RentalStore`
 

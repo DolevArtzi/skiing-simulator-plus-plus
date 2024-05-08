@@ -23,6 +23,9 @@ class RentalStore:
     - make your own prices, so that they don't overlap
     - make the prices higher if it's the weekend (is_weekend) or if it's skiing season (is_season),
         and the highest if it's both the weekend and ski season
+        - specifically, if it's either the weekend or ski season (but not both), the lowest price should be at least $50 for each item
+        - if its both the weekend and ski season, the lowest price should be at least $80 for each item
+        - if its neither, the lowest price should be at least $30 for each item
     Effects:
         - populates the `price_points` dictionary, mapping each `gear_type` to a length-3 list of tuples of price ranges
     """
@@ -36,8 +39,8 @@ class RentalStore:
 
     """ generate_price
     Description:
-        - given the item_name, and the index into price_points, generates a random price
-            using Python's random module, which represents the price of this item
+        - given the item_name, and the index into price_points[item_name], generates a random price
+            using Python's random module, which represents the price of this item that is in the chosen range
     Inputs:
         - item_name : str
         - range_idx : int: either 0, 1, or 2: the index into the corresponding tuple of price ranges
@@ -57,15 +60,14 @@ class RentalStore:
         - skier_name : str
         - gear_list : list[str]: a list of the gear items the skier needs to buy
         - prices_max : list[int]: a list of the skier's price range for each item, such that
-            prices_max[i] is the skier's max price for the item referenced by gear_list[i].
-            This is represented by an index: 0, 1, or 2: with 0 being the lowest price range, 
-            and 2 being the highest
+            prices_max[i] is the skier's max price range (by index) for the item referenced by gear_list[i] denoted 
+            by the index into the price_points list
     Effects:
         - adds a new k:v pair to the `skiers_served` dictionary, where the key is the skier's name,
             and the value is a list of tuples, for example, `[('pants',100),('coat',250)` means you 
             sold the skier pants which cost $100 and a coat that costs $250
     """
-    def serve_skier(self,skier_name:str,gear_list:list[str],prices_max:list[tuple[int]]):
+    def serve_skier(self,skier_name:str,gear_list:list[str],prices_max:list[int]):
         ### TODO
         pass
 
@@ -79,7 +81,6 @@ class RentalStore:
         - populates the skiers_served dictionary, through the use of the serve_skier function
     """
     def serve_group(self,skier_info:dict):
-        
         ### TODO
         pass
 
@@ -91,10 +92,8 @@ class RentalStore:
         - adds the cumulative cost of goods sold to the given skier to RentalStore.money_earned
     """
     def check_out_skier(self,skier_name:str):
-        
         ### TODO
         pass
-
 
     """ print_sales
     Description: nicely prints a summary of the day's sales
@@ -108,13 +107,13 @@ class RentalStore:
 
     """ close_store
     Description:
-        - for each skier served, add the money earned from them to cost, and nicely displays 
+        - for each skier served, add the money earned from them to money_earned, and nicely displays 
             the day's spoils. To display, calls RentalStore.print_sales after calling check_out_skier
             for each skier we served today
+    Returns: the total amount of money earned today
     Effects:
         - fills in the day's information to the money_earned parameter of our RentalStore
     """
     def close_store(self):
-
         ### TODO
         pass
